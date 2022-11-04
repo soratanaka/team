@@ -8,12 +8,10 @@ class SessionsController < ApplicationController
     email = params[:session][:email].downcase
     password = params[:session][:password]
     if login(email, password)
-      p 'ログインしました'
-      #flash[:success] = 'ログインに成功しました。'
-      redirect_to new_session_path #user_path(@user.id)
+      flash[:success] = 'ログインに成功しました。'
+      redirect_to  user_path(@user.id)
     else
-      p 'ログインに失敗しました'
-      #flash.now[:danger] = 'ログインに失敗しました。'
+      flash.now[:danger] = 'ログインに失敗しました。'
       render 'new'
     end
   end

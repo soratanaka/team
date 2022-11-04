@@ -17,9 +17,9 @@
   <tbody>
     <% @blogs.each do |blog| %>
       <tr>
-        <td><%= blog.title.truncate(14) %></td>
-        <td><%= blog.content.truncate(14) %></td>
-        <td>username</td>
+        <td><%= blog.title %></td>
+        <td><%= blog.content %></td>
+        <td><%= blog.user.name %></td>
         <td><%= link_to '詳細を確認', blog_path(blog.id) %></td>
         <td><%= link_to "編集", edit_blog_path(blog.id) %></td>
         <td><%= link_to 'ブログを削除する', blog_path(blog.id), method: :delete ,data: { confirm: '本当に削除していいですか？' } %></td>
