@@ -8,7 +8,11 @@ class BlogsController < ApplicationController
   end
 
   def new
-    @blog = Blog.new
+    if params[:back]
+      @blog = Blog.new(post_params)
+    else
+      @blog = Blog.new
+    end
   end
 
   def edit

@@ -5,16 +5,13 @@ class SessionsController < ApplicationController
   end
 
   def create
-    email = params[:session][:email].downcase
-    password = params[:session][:password]
-    if login(email, password)
-      p 'ログインしました'
-      #flash[:success] = 'ログインに成功しました。'
-      redirect_to new_session_path #user_path(@user.id)
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
+      redirect_to user_path(user.id)
     else
-      p 'ログインに失敗しました'
-      #flash.now[:danger] = 'ログインに失敗しました。'
-      render 'new'
+      flash[:danger] = 'ログインに失敗しました'
+      render :new
     end
   end
   
@@ -24,17 +21,4 @@ class SessionsController < ApplicationController
     flash[:notice] = 'ログアウトしました'
     redirect_to new_session_path
   end
-
-  private
-
-  def login(email, password)
-    @user = User.find_by(email: email)
-    if @user && @user.authenticate(password)
-      session[:user_id] = @user.id
-      return true
-    else
-      return false
-    end
-  end
-
 end
