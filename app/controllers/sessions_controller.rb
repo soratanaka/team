@@ -18,6 +18,7 @@ class SessionsController < ApplicationController
     end
   end
   
+
   def destroy
     session.delete(:user_id)
     flash[:notice] = 'ログアウトしました'
@@ -35,4 +36,5 @@ class SessionsController < ApplicationController
       return false
     end
   end
+
 end

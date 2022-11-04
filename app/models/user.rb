@@ -1,3 +1,4 @@
 class User < ApplicationRecord
   has_secure_password
-end
+  has_many :blogs, dependent: :destroy
+
