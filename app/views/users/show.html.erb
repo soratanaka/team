@@ -1,0 +1,8 @@
+<h1><%= @user.name %>のページ</h1>
+
+<p>メールアドレス: <%= @user.email %></p>
+<%= <%= link_to "ブログ一覧へ", blogs_path %> %>
+
+<% if user_signed_in? && @user == current_user %>
+  <%= link_to "delete", user, method: :delete, data: { confirm: "本当に退会しますか?" } %>
+<% end %>

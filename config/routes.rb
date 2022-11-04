@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   resources :users
+  root to: 'blogs#index'
   get 'sessions/new'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resources :blogs: [:new, :create, :show, :edit, :update, :destroy]
+  resources :sessions, only: [:new, :create, :destroy]
+  resources :users, only: [:show,:new, :create, :edit, :update, :destroy]
 end
